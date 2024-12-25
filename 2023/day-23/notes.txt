@@ -1,0 +1,1 @@
+shortest path in sample grid to exit is: 72

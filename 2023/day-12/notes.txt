@@ -1,0 +1,70 @@
+.#?.??#????#?.?.2,4,1,1
+
+f(.#?.??#????#?.?., (2,4,1,1))
+= f(#?.??#????#?.?, (2,4,1,1))
+= f(??#????#?.?, (4,1,1))
+= f(#?#????#?.?, (4,1,1)) + f(.?#????#?.?, (4,1,1))
+
+f(#?#????#?.?, (4,1,1))
+= f(??#?.?, (1,1))
+= f(#?#?.?, (1,1)) + f(.?#?.?, (1,1))
+ 
+
+f(#?#?.?, (1,1)) = f(#?.?, (1)) = 1
+
+f(i, j) = (f(i + c[j], j + 1) * canPlace(i, c[j])) + f(i + 1, j)
+
+ 
+
+f(i, j) {
+    if X[i] == '#' and not canPlace(i, c[j]):
+        return 0
+}
+
+ 
+inputs:
+
+X = input string
+
+c = list of constraints
+
+ 
+
+f(i, j) {
+    if X[i] == '#' and not canPlace(i, c[j]):
+        return 0 // Must place next machine here but its not possible
+
+    if X[i] == '.':
+        return f(i + 1, j)  // Cannot start machine here, go to next position
+
+    if X[i] == '#':
+        if not canPlace(i, c[j]):
+            return 0 // Must place next machine here but its not possible
+        else:
+            return f(i + c[j], j + 1) // Must place next machine here, recurse
+
+    if X[i] == '?':
+        res = f(i+1, j)
+        if canPlace(i, c[j]):
+            res += f(i + c[j], j + 1)
+}
+
+ 
+
+f(X, c) {
+    if X[0] == '#' and not canPlace(X, c[0]):
+        return 0 // Must place next machine here but its not possible
+ 
+    if X[0] == '.':
+        return f(X[1:], c)  // Cannot start machine here, go to next position
+ 
+    if X[0] == '#':
+        if not canPlace(X, c[0]):
+            return 0 // Must place next machine here but its not possible
+        else:
+            return f(X[c[0]:], c[1:]) // Must place next machine here, recurse
+ 
+    // If '?' compute both cases
+    return f(['#'] + X[1:], c) + f(['.'] + X[1:], c)
+}
+```

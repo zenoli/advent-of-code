@@ -1,0 +1,15 @@
+# Recursive
+
+def find_inputs(prg: str) -> list[str]:
+    x, *xs = prg
+    
+    inputs = []
+
+    for i in range(8):
+        inputs_xs = find_input(xs)
+        for input_xs in inputs_xs:
+            if run(input := [*input_xs, i]) == prg:
+                inputs.add(input)
+    return inputs
+
+

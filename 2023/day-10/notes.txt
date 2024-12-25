@@ -1,0 +1,31 @@
+
+
+L: (-1, 0) <-> ( 0, 1)
+7: ( 0,-1) <-> ( 1, 0)
+F: ( 1, 0) <-> ( 0, 1)
+J: (-1, 0) <-> ( 0,-1)
+
+|: (-1, 0) <-> ( 1, 0)
+-: ( 0,-1) <-> ( 0, 1)
+
+
+prev: (1,1)
+curr: (2,1)
+
+
+-1: Left turn
++1: right turn
+ 0: straight
+
+
+F: BELOW -> RIGHT: right turn (+1)
+F: RIGHT -> BELOW: left turn (-1)
+
+7: BELOW -> LEFT: left turn (-1)
+7: LEFT -> BELOW: right turn (+1)
+
+J: ABOVE -> LEFT: right turn (+1)
+J: LEFT -> : ABOVE left turn (-1)
+
+L: ABOVE -> RIGHT: left turn (-1)
+L: RIGHT -> : ABOVE right turn (+1)

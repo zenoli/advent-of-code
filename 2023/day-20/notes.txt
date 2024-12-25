@@ -1,0 +1,130 @@
+
+graph = {
+    broadcster: [a,b,c],
+    a: [b]
+
+}
+
+type Task = list[tuple[str, boolean]]
+
+
+class Module:
+    self.outputs: list[str]
+    self.inputs: list[str]
+    
+    def process(in_pulse: bool, name: str) -> boolean
+        pass
+
+
+    def generate_tasks(out_pulse: bool) -> list[Task]:
+        return [(out_module, out_pulse) for out_module in self.outputs]
+
+
+class Broadcaster(Module):
+    
+    def process(in_pulse: bool, name: str):
+        return generate_tasks(in_pulse)
+
+
+class FlipFlop(Module):
+    
+    self.state = False
+
+    def process(in_pulse: bool, name: str):
+        if not inpulse:
+            self.state = not self.state
+            return generate_tasks(self.state)
+        else
+            return []
+
+
+class Conjunction(Module):
+    ...
+
+
+
+
+inputs = {
+    a: [broadcaster]
+    inv: [a]
+    con: [a, b]
+    b: [inv]
+    output: [con]
+}
+
+outputs = {
+    broadcaster: [a]
+    a: [inv, con]
+    inv: [b]
+    b: [con]
+    con: [output]
+}
+
+flipflops = {
+    a: False
+    b: False
+}
+
+conjuctions = {
+    inv: { a: False },
+    con: { a: False, b: False}
+}
+
+
+def process(pulse, src, dst):
+    if dst[0] == "&":
+        return process_conjunction(pulse, src, dst, flipflops)
+    elif dst[0] == "%"
+        return process_flipflop(pulse, src, dst, flipflops)
+    elif dst == "broadcaster":
+        return process_broadcaster(...)
+    else:
+        return []
+
+
+
+def solve():
+    tasks = [(False, "button", "broadcaster")]
+    while tasks:
+        task = tasks.pop(0)
+        tasks.extend(process(*task))
+
+
+
+    
+
+gz: start: 2048, stepsize: 3761, length: 3761
+cd: start: 512, stepsize: 1024, length: 1024
+fm: start: 4, stepsize: 8, length: 8
+mp: start: 8, stepsize: 16, length: 16
+rt: start: 64, stepsize: 128, length: 128
+pm: start: 2048, stepsize: 4049, length: 4049
+mv: start: 32, stepsize: 64, length: 64
+gf: start: 1024, stepsize: 2048, length: 2048
+vz: start: 512, stepsize: 1024, length: 1024
+jm: start: 64, stepsize: 128, length: 128
+qn: start: 1, stepsize: 2, length: 2
+gb: start: 16, stepsize: 32, length: 32
+dt: start: 2, stepsize: 4, length: 4
+gr: start: 64, stepsize: 128, length: 128
+xh: start: 256, stepsize: 512, length: 512
+bh: start: 1024, stepsize: 2048, length: 2048
+sz: start: 2048, stepsize: 3931, length: 3931
+lq: start: 8, stepsize: 16, length: 16
+lg: start: 256, stepsize: 512, length: 512
+mb: start: 128, stepsize: 256, length: 256
+lj: start: 16, stepsize: 32, length: 32
+jk: start: 1024, stepsize: 2048, length: 2048
+vx: start: 1024, stepsize: 2048, length: 2048
+lb: start: 32, stepsize: 64, length: 64
+zq: start: 2048, stepsize: 4079, length: 4079
+gs: start: 2, stepsize: 4, length: 4
+kj: start: 256, stepsize: 512, length: 512
+hp: start: 1, stepsize: 2, length: 2
+bb: start: 16, stepsize: 32, length: 32
+xv: start: 1, stepsize: 2, length: 2
+pb: start: 128, stepsize: 256, length: 256
+tl: start: 512, stepsize: 1024, length: 1024
+zb: start: 1, stepsize: 2, length: 2
+nk: start: 512, stepsize: 1024, length: 1024
+db: start: 128, stepsize: 256, length: 256

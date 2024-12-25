@@ -1,0 +1,12 @@
+
+def get_neighbors(pos, d, c):
+    new_directions = directions - {d}
+    neighbors = [add(pos, new_d), d, 1 for new_d in new_directions]
+    if c + 1 <= 3:
+        neighbors.append(add(pos, d), d, c + 1)
+
+
+seen = np.full((*grid.shape, 4, 3))
+
+
+[5, 11, directions[DOWN]]

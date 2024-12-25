@@ -1,0 +1,58 @@
+fm <-- {'dt'}
+hd <-- {'kj', 'gr', 'mv', 'dt', 'tl', 'fm', 'jk', 'zq', 'pb', 'hp', 'mp'}
+jk <-- {'tl'}
+kc <-- {'gs', 'nk', 'lq', 'zb', 'lg', 'rt', 'vx', 'lj', 'sz'}
+sz <-- {'vx'}
+tl <-- {'kj'}
+tb <-- {'gb', 'xh', 'pm', 'db', 'gf', 'qn', 'cd', 'jm'}
+rt <-- {'fc'}
+qq <-- {'gb', 'tb'}
+sk <-- {'qn', 'tb'}
+pv <-- {'tb'}
+vj <-- {'sx', 'tb'}
+qn <-- {'broadcaster', 'tb'}
+sx <-- {'sk', 'tb'}
+bb <-- {'df'}
+jm <-- {'qq'}
+vz <-- {'sl'}
+hp <-- {'hd', 'broadcaster'}
+zb <-- {'kc', 'broadcaster'}
+xv <-- {'fl', 'broadcaster'}
+kh <-- {'xm', 'hz', 'qh', 'pv'}
+pm <-- {'gf'}
+kj <-- {'pb'}
+pb <-- {'gr'}
+pd <-- {'kc', 'gs'}
+df <-- {'fl', 'tx'}
+db <-- {'jm'}
+fl <-- {'lb', 'bb', 'bh', 'gz', 'mb', 'vz', 'xv'}
+gz <-- {'bh'}
+xp <-- {'kc', 'rt'}
+zm <-- {'lb', 'fl'}
+lq <-- {'pd'}
+gr <-- {'mv'}
+mv <-- {'js'}
+dt <-- {'hp'}
+vx <-- {'nk'}
+rx <-- {'kh'}
+tx <-- {'fl', 'zc'}
+js <-- {'mp', 'hd'}
+mb <-- {'zm'}
+cd <-- {'xh'}
+xh <-- {'db'}
+gb <-- {'vj'}
+fc <-- {'kc', 'lj'}
+nk <-- {'lg'}
+sl <-- {'mb', 'fl'}
+qh <-- {'fl'}
+zc <-- {'fl', 'xv'}
+xm <-- {'kc'}
+lj <-- {'lq'}
+hz <-- {'hd'}
+bh <-- {'vz'}
+mp <-- {'fm'}
+lb <-- {'bb'}
+gs <-- {'zb'}
+lg <-- {'xp'}
+zq <-- {'jk'}
+gf <-- {'cd'}

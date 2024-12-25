@@ -1,0 +1,87 @@
+px:
+x: [1:4000]
+m: [2091:4000]
+a: [2006:4000]
+s: [1:4000]
+
+pv:
+x: [1:4000]
+m: [1:4000]
+a: [1:1716]
+s: [1:4000]
+
+
+lnx:
+x: [1:4000]
+m: [1:4000]
+a: [1:4000]
+s: [1:4000]
+
+rfg:
+x: [1:2440]
+m: [1:4000]
+a: [1:4000]
+s: [537:]
+
+qs:
+x: [1:4000]
+m: [1:4000]
+a: [1:4000]
+s: [3449:]
+
+qkq:
+x: [1:1415]
+m: [1:4000]
+a: [1:4000]
+s: [1:4000]
+
+crn:
+x: [2663:4000]
+m: [1:4000]
+a: [1:4000]
+s: [1:4000]
+
+
+in:
+???
+
+hdj:
+x: [1:4000]
+m: [839:4000]
+a: [1:4000]
+s: [1:4000]
+
+
+## Part 2
+
+
+def get_constraints(state):
+    if state == 'A':
+        return [
+            {x: (1, 4001), m: (1, 4001), a: (1, 4001), s: (1, 4001)}
+        ]
+
+    constraints = []
+    for out_state, condition in workflows[state]:
+        constraints += update_constraints(condition, get_constraints(out_state))
+
+    return constraints
+
+
+def update_constraint(condition, constraint):
+    category, op, thresh = condition
+    low, hi = constraint[category]
+    if op == '<':
+        hi = min(hi, thresh)
+    else:
+        low = max(low, thresh + 1)
+
+    if low < hi:
+        constraint[category] = (low, hi)
+        return constraint
+    else:
+        return None
+
+    
+def update_constraints(condition, constraints):
+    list(map(lambda c: update_constraint(condition, c), constraints))
