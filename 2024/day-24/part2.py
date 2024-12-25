@@ -4,6 +4,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from enum import StrEnum, auto
 from collections import defaultdict
+from typing import cast
 
 
 class Op(StrEnum):
@@ -110,7 +111,6 @@ def to_graphviz_format(graph):
         print(f'{vertex(v)} [color="{color}"]')
         print(f"{vertex(v)} -> {vertex(u1)}")
         print(f"{vertex(v)} -> {vertex(u2)}")
-        # print(f"{vertex(v)} -> {vertex(u)}")
     print("}")
 
 
@@ -118,7 +118,6 @@ def to_graph(gates: dict[str, tuple[str, str, str]]):
     graph = defaultdict(list)
     for v, (wire1, op, wire2) in gates.items():
         graph[f"{v}"].extend([wire1, wire2, op])
-        # graph[f"{v} ({op})"].extend([wire1, wire2])
     return graph
 
 
@@ -134,20 +133,62 @@ def main():
             op=Op(op.lower()),
         )
 
+    def verify_output_gate(gate: Evaluable):
+        assert isinstance(gate, Gate)
+        assert gate.name.startswith("z")
+        if not gate.op == Op.XOR:
+            yield gate.name
+
+        assert isinstance(gate.wire1, Gate)
+        assert isinstance(gate.wire2, Gate)
+
+        if (
+            gate.wire1.op == Op.XOR
+            and gate.wire1.wire1.name[0] in "xy"
+            and not gate.wire2.op == Op.OR
+        ):
+            yield gate.wire2.name
+        if gate.wire1.op == Op.OR and not gate.wire2.op == Op.XOR:
+            yield gate.wire2.name
+        if (
+            gate.wire2.op == Op.XOR
+            and gate.wire2.wire1.name[0] in "xy"
+            and not gate.wire1.op == Op.OR
+        ):
+            yield gate.wire1.name
+        if gate.wire2.op == Op.OR and not gate.wire1.op == Op.XOR:
+            yield gate.wire1.name
+
+        yield from verify_last_carry_over_gate(
+            gate.wire2 if gate.wire1.op == Op.XOR else gate.wire1
+        )
+
+    def verify_last_carry_over_gate(gate: Evaluable):
+        assert isinstance(gate, Gate)
+        assert isinstance(gate.wire1, Gate)
+        assert isinstance(gate.wire2, Gate)
+        if not gate.wire1.op == Op.AND:
+            yield gate.wire1.name
+        if not gate.wire2.op == Op.AND:
+            yield gate.wire2.name
+
     # inputs, gates = read_input("sample.txt")
-    inputs, gates = read_input("input-z35-fix.txt")
-    # inputs, gates = read_input("input-mod.txt")
+    inputs, gates = read_input("input.txt")
 
-    graph = to_graph(gates)
-    to_graphviz_format(graph)
-    # outputs = list(reversed(sorted(name for name in gates if name.startswith("z"))))
-    # out_gates = [init(output) for output in outputs]
-    # out_gates[0].to_graphviz_format()
-    # result = [o.eval() for o in out_gates]
-    # print(to_number(result))
+    # graph = to_graph(gates)
+    # to_graphviz_format(graph)
+    outputs = list(reversed(sorted(name for name in gates if name.startswith("z"))))
+    out_gates = [cast(Gate, init(output)) for output in outputs]
 
-    # >> correct: (dpg, z25), (z10, kmb), (tpv, z15), (mmf, vdk)
-    # >> correct: ["dpg", "z25", "z10", "kmb", "tvp", "z15", "mmf", "vdk" ]
+    faulty_gates = []
+    for out_gate in out_gates[1:-2]:
+        try:
+            for faulty_gate in verify_output_gate(out_gate):
+                faulty_gates.append(faulty_gate)
+        except AssertionError as e:
+            continue
+
+    print(",".join(sorted(faulty_gates)))
 
 
 if __name__ == "__main__":
